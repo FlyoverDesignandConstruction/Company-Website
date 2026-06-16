@@ -20,11 +20,7 @@
   <header class="site-header" id="site-header">
     <div class="container header-inner">
       <a href="#home" class="logo-link">
-        <div class="logo-icon">F</div>
-        <div class="logo-text">
-          <div class="logo-name">FLYOVER</div>
-          <div class="logo-sub">Design &amp; Construction Co., Ltd.</div>
-        </div>
+        <img src="LOGO-Sign.png" alt="Flyover Design & Construction logo" class="site-logo" />
       </a>
       <nav class="main-nav" id="main-nav">
         <a href="#about" class="nav-link">About Us</a>
@@ -77,7 +73,7 @@
             </div>
             <div class="founded-badge">
               <div class="founded-year">2020</div>
-              <div class="founded-label">Founded in Yangon</div>
+              <div class="founded-label">Founded in NayPyiTaw</div>
             </div>
           </div>
           <div>
@@ -103,7 +99,8 @@
                 <div class="stat-label">Regional Offices</div>
               </div>
             </div>
-            <button class="btn btn-outline-primary">
+            
+               <button class="btn btn-outline-primary" id="read-more-btn" data-popup-open="company-overview-popup" aria-expanded="false">
               Read More
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </button>
@@ -565,13 +562,83 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">F</div>
-        <div class="footer-copy">© <span id="year"></span> Flyover Design &amp; Construction Co., Ltd.</div>
-      </div>
-      <div class="footer-regions">Yangon · Mandalay · Nay Pyi Taw</div>
+      <nav class="footer-social-links" aria-label="Social media">
+        <a class="footer-social-link" href="https://www.facebook.com/share/1FhojBSSvP/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 320 512" aria-hidden="true" focusable="false">
+            <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06H297V6.26S260.43 0 225.36 0C152.14 0 104.28 44.38 104.28 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+          </svg>
+        </a>
+        <a class="footer-social-link" href="https://wa.me/9595084747" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.9 7.9 0 0 0-2.327-5.607M7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.473.205.842.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+          </svg>
+        </a>
+        <a class="footer-social-link" href="https://www.tiktok.com/@flyover.company" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z" />
+          </svg>
+        </a>
+        <a class="footer-social-link" href="https://www.linkedin.com/company/flyover-design-and-construction-co-ltd/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708C16 15.487 15.474 16 14.825 16H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.225 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+          </svg>
+        </a>
+        <a class="footer-social-link" href="viber://chat?number=%2B9595084747" aria-label="Viber">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M7.5 5.5h9A2.5 2.5 0 0 1 19 8v6.2a2.5 2.5 0 0 1-2.5 2.5h-3.8l-3.1 2.4v-2.4H7.5A2.5 2.5 0 0 1 5 14.2V8a2.5 2.5 0 0 1 2.5-2.5Z" />
+            <path d="M9.3 8.5c.3 2.8 2 4.5 4.8 4.8l.9-1.2c.2-.3.6-.4.9-.2l1 .5c.3.2.5.5.4.9-.3 1-1.1 1.7-2.1 1.7-4.3-.3-7.3-3.3-7.6-7.6 0-1 .7-1.8 1.7-2.1.4-.1.7.1.9.4l.5 1c.2.3.1.7-.2.9L9.3 8.5Z" />
+          </svg>
+        </a>
+        <a class="footer-social-link" href="https://t.me/flyoverdesign" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21.9 4.4 18.7 19.5c-.2.9-.8 1.1-1.6.7l-4.5-3.3-2.2 2.1c-.2.2-.4.4-.9.4l.3-4.6 8.3-7.5c.4-.3-.1-.5-.6-.2L7.3 13.6 2.9 12.2c-.9-.3-.9-.9.2-1.3l17.3-6.7c.8-.3 1.6.2 1.5 1.2z" />
+          </svg>
+        </a>
+      </nav>
+      <p class="footer-tagline">" Your Dreams, Our Service . "</p>
+      <p class="footer-copy">&copy; 2025 Flyover Design &amp; Construction Co., Ltd. All<br />Rights Reserved.</p>
     </div>
   </footer>
+
+    <div class="company-overview" id="company-overview-popup" role="dialog" aria-modal="true" aria-hidden="true"
+    aria-labelledby="company-overview-popup-title">
+    <div class="overview-popup__backdrop" data-close-overview data-popup-close></div>
+    <article class="overview-popup__panel">
+      
+      <button class="overview-popup__close" type="button" data-close-overview data-popup-close
+        aria-label="Close company overview popup">&times;</button>
+
+      <h2 id="company-overview-popup-title">Company Overview</h2>
+      <div class="overview-popup__content">
+        <p>
+          Flyover Design and Construction Company is a dynamic and innovative organization dedicated to providing
+          exceptional design and construction services. In 2020, with a commitment to excellence and a passion for
+          creativity, we established ourselves as a leader in the industry. We are a company of professionals and
+          experts with relevant licenses. Our head office is located in Yangon and our organization is a DICA registered
+          company in Myanmar.
+        </p>
+        <p>
+          Our unwavering focus on quality, safety and sustainability sets us apart, and our clients receive the best
+          possible solutions. We specialize in Architectural Design (Residential, Apartment, Commercial), Design
+          renovation and Interior design, Decoration and Furniture works, M&amp;E, High Tension, Road and Bridge. Our
+          custom home builds, renovation and building addition projects have been operating in Yangon, Nay Pyi Taw,
+          Mandalay, and other regions of Myanmar for years.
+        </p>
+        <p>
+          Flyover philosophy is founded on the belief that buildings transform the life of people and communities. We
+          create the desired atmosphere for users to enjoy functionality inside the building. Using simplicity and
+          technology becomes the innovative design.
+        </p>
+        <p>
+          Flyover aims to build aesthetically valuable and inspiring architecture to enrich people lives and create
+          better world to live in. Flyover aims to be a high leading company that values clients ideas to life through
+          the creation of space. Our higher mission is in shaping the future of the world by creating a safe sustainable
+          community by our architecture.
+        </p>
+      </div>
+    </article>
+  </div>
+
 
   <script src="main.js"></script>
 </body>
