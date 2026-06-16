@@ -397,7 +397,7 @@ em.primary-italic { color: var(--accent-600); font-style: italic; }
   background: var(--blue);
   color: var(--white);
   font: inherit;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 800;
   cursor: pointer;
   box-shadow: 0 12px 28px rgba(20, 107, 183, 0.2);
@@ -442,7 +442,7 @@ em.primary-italic { color: var(--accent-600); font-style: italic; }
   position: relative;
   max-width: 44rem;
   width: min(100%, 42rem);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 1rem;
   background: #ffffff;
   box-shadow: 0 24px 90px rgba(15, 21, 48, 0.2);
@@ -829,4 +829,43 @@ body.modal-open {
   font-size: 0.875rem;
   text-align: center;
   margin-top: 0.5rem;
+}
+
+/* ── MOBILE TYPOGRAPHY ADJUSTMENTS ───────────────────────────── */
+@media (max-width: 480px) {
+  /* Tighter section spacing */
+  .section { padding: 3rem 0; }
+
+  /* Headings */
+  .section-title { font-size: 1.6rem; margin-bottom: 1rem; }
+  .section-title.center { font-size: 1.6rem; }
+
+  /* Section descriptions and card text */
+  .section-desc { font-size: 0.8rem; max-width: none; }
+  .card-title { font-size: 1rem; }
+  .card-desc, .card-desc.sm { font-size: 0.8rem; }
+
+  /* Body text */
+  .body-text { font-size: 0.95rem; line-height: 1.6; }
+  .body-text.center { text-align: left; }
+
+  /* Hero */
+  .hero { min-height: 60vh; }
+  .hero-title { font-size: 2.2rem; max-width: 100%; }
+  .hero-desc { font-size: 0.95rem; max-width: 100%; }
+
+  /* Smaller UI text */
+  .nav-link { font-size: 0.85rem; }
+  .btn { font-size: 0.85rem; padding: 0.6rem 1rem; }
+
+  /* Forms */
+  .form-label { font-size: 0.7rem; }
+  .form-input { font-size: 0.9rem; }
+
+  /* Reduce large image/card heights to fit mobile */
+  .rounded-img.tall { height: 18rem; }
+  .project-card { height: 12rem; }
+
+  /* Ensure overview popup is comfortably sized */
+  .overview-popup__panel { width: calc(100% - 2rem); max-width: none; padding: 1rem; }
 }
