@@ -5,6 +5,7 @@
 
 (function () {
   "use strict";
+  let lastFocusedElement = null;
 
   // ── SET FOOTER YEAR ────────────────────────────────────────
   const yearEl = document.getElementById("year");
@@ -136,7 +137,7 @@
 
   fadeTargets.forEach((el) => observer.observe(el));
 
-  // ── ACTIVE NAV LINK ON SCROLL ──────────────────────────────
+  // ── ACTIVE NAV LINK ON SCROLL 
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".main-nav .nav-link");
 
@@ -163,3 +164,70 @@
 
   sections.forEach((s) => navObserver.observe(s));
 })();
+
+function openPopup(popup, opener) {
+  if (!popup) {
+    return;
+  }
+
+  lastFocusedElement = opener || document.activeElement;
+  popup.classList.add("is-open");
+  popup.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  opener?.setAttribute("aria-expanded", "true");
+  popup.querySelector("[data-popup-close], [data-close-overview], .overview-popup__close")?.focus();
+}
+
+function closePopup(popup) {
+  if (!popup) {
+    return;
+  }
+
+  popup.classList.remove("is-open");
+  popup.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+
+  const opener = document.querySelector("[data-popup-open][aria-expanded=\"true\"]");
+  if (opener) {
+    opener.setAttribute("aria-expanded", "false");
+  }
+
+  if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+    lastFocusedElement.focus();
+  }
+}
+
+const popupTriggers = document.querySelectorAll("[data-popup-open]");
+const popupCloseButtons = document.querySelectorAll("[data-popup-close]");
+const popupDialogs = document.querySelectorAll("[role='dialog']");
+
+popupTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    const popupId = trigger.dataset.popupOpen || trigger.getAttribute("aria-controls");
+    openPopup(document.getElementById(popupId), trigger);
+  });
+});
+
+popupCloseButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    closePopup(button.closest("[role='dialog']"));
+  });
+});
+
+popupDialogs.forEach((dialog) => {
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      closePopup(dialog);
+    }
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    const openDialog = document.querySelector("[role='dialog'].is-open");
+    if (openDialog) {
+      closePopup(openDialog);
+    }
+  }
+});
