@@ -281,7 +281,7 @@ em.primary-italic { color: var(--accent-600); font-style: italic; }
 .logo-link { display: flex; align-items: center; }
 .site-logo { display: block; height: 13rem; width: auto; object-fit: contain; }
 .main-nav  { display: flex; align-items: center; gap: 2.25rem; }
-.nav-link  { font-size: 0.875rem; color: rgba(255, 255, 255, 0.8); transition: color 0.2s; }
+.nav-link  { font-size: 0.875rem; color: rgba(0, 0, 0, 0.8); transition: color 0.2s; }
 .nav-link:hover { color: #ffffff; }
 .menu-toggle { display: none; flex-direction: column; gap: 5px; }
 .menu-toggle span {
