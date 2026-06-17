@@ -215,10 +215,13 @@ em.primary-italic { color: var(--accent-600); font-style: italic; }
   border-radius: 9999px;
   padding: 0.375rem 1rem;
   margin-bottom: 1rem;
+  background: white;
+  color: #0071bc;
+  border: 1px solid black;
 }
-.primary-badge { background: var(--primary-50); color: var(--primary-400); }
-.accent-badge   { background: var(--accent-50); color: var(--accent-600); }
-.secondary-badge { background: var(--secondary-50); color: var(--secondary-600); }
+.primary-badge { background: white; color: #0071bc; border: 1px solid black; }
+.accent-badge   { background: white; color: #0071bc; border: 1px solid black; }
+.secondary-badge { background: white; color: #0071bc; border: 1px solid black; }
 .section-label-badge { background: #ffffff; color: #0071bc; border: 1px solid #8b8b8b; }
 .badge {
   display: inline-flex;
