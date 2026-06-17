@@ -881,7 +881,7 @@ body.modal-open {
     position: absolute;
     top: 100%;
     left: 0; right: 0;
-    background: #0071bc;
+    background: #ffffff;
     flex-direction: column;
     gap: 0;
     padding: 1rem 0;
