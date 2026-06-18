@@ -145,7 +145,7 @@ h1, h2, h3, h4 {
 }
 .card-desc.light { color: rgba(255,255,255,0.8); }
 .card-desc.sm { font-size: 0.8rem; }
-em.accent-text { color: var(--gold-500); font-style: italic; }
+em.accent-text { color: #80ccff; font-style: italic; }
 em.primary-italic { color: var(--primary-600); font-style: italic; }
 em.accent-italic { color: var(--gold-500); font-style: italic; }
 
@@ -587,11 +587,11 @@ em.accent-italic { color: var(--gold-500); font-style: italic; }
 .founded-badge {
   position: absolute;
   bottom: -1.5rem; right: -1rem;
-  background: var(--grad-gold);
-  color: var(--fg-900);
+  background: #2563d6;
+  color: #80ccff;
   border-radius: var(--r-2xl);
   padding: 1.1rem 1.75rem;
-  box-shadow: var(--shadow-gold);
+  box-shadow: var(--shadow-blue);
 }
 @media (min-width: 1024px) { .founded-badge { right: 1.5rem; } }
 .founded-year {
@@ -599,9 +599,9 @@ em.accent-italic { color: var(--gold-500); font-style: italic; }
   font-size: 1.875rem;
   font-weight: 800;
   line-height: 1;
-  color: var(--fg-900);
+  color: #ffffff;
 }
-.founded-label { color: rgba(0,0,0,0.65); font-size: 0.75rem; font-weight: 600; margin-top: 2px; }
+.founded-label { color: #ffffff; font-size: 0.75rem; font-weight: 600; margin-top: 2px; }
 
 .stats-row {
   display: grid;

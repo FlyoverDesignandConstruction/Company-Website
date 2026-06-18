@@ -315,6 +315,7 @@
     alt: 'Modern office space interior of Flyover new Mandalay regional office',
     readTime: '3 min read'
   }
+  
 ];
 
 const categoryColors = {
@@ -343,13 +344,11 @@ newsItems.forEach(item => {
     <div class="post-body">
       <div class="meta-row">
         <span class="badge" style="background:${bg};">${item.category}</span>
-        <span class="read-time">${item.readTime}</span>
       </div>
       <h3 class="card-title-sm">${item.title}</h3>
       <p class="card-excerpt-sm">${item.excerpt}</p>
       <div class="post-footer">
         <span class="card-date">${item.date}</span>
-        <button class="read-more-sm">Read More ${arrowSVG}</button>
       </div>
     </div>`;
   grid.appendChild(article);
