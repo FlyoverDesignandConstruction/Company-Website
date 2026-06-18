@@ -147,7 +147,7 @@ h1, h2, h3, h4 {
 .card-desc.sm { font-size: 0.8rem; }
 em.accent-text { color: #80ccff; font-style: italic; }
 em.primary-italic { color: var(--primary-600); font-style: italic; }
-em.accent-italic { color: var(--gold-500); font-style: italic; }
+em.accent-italic { color: #0071bc; font-style: italic; }
 
 /* ── LAYOUT ─────────────────────────────────────────────────── */
 .container {
