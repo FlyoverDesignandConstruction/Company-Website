@@ -354,4 +354,12 @@ newsItems.forEach(item => {
   grid.appendChild(article);
 });
 
+const btn = document.getElementById('viewAllBtn');
+
+btn.addEventListener('click', function () {
+  // Replace with your actual navigation logic
+  console.log('View All Articles clicked');
+  // window.location.href = '/articles';
+});
+
 })();
