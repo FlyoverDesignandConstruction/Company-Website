@@ -1,0 +1,101 @@
+
+<style>
+  .pj { font-family: 'Inter', sans-serif; background: #fafbfd; padding: 3rem 1.5rem 3.5rem; }
+  .pj-header { text-align: center; margin-bottom: 2rem; }
+  .pj-eye { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #0071bc; background: linear-gradient(135deg,#f0f5ff,#e8f0ff); border: 1px solid #b8d0f7; border-radius: 9999px; padding: .35rem 1rem; margin-bottom: .75rem; }
+  .pj-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.5rem,3.5vw,2.25rem); font-weight: 700; color: #030712; line-height: 1.15; margin-bottom: .75rem; }
+  .pj-sub { font-size: .875rem; color: #6b7280; max-width: 30rem; margin: 0 auto; line-height: 1.75; }
+  .pj-filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 2rem; }
+  .pj-btn { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 6px 18px; border-radius: 9999px; border: 1px solid transparent; cursor: pointer; background: #f3f4f6; color: #4b5563; transition: all .2s; }
+  .pj-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
+  .pj-btn.active { background: linear-gradient(135deg,#0071bc,#1a3a7e); color: #fff; box-shadow: 0 4px 14px rgba(0,113,188,.35); }
+  .pj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  /* Tablet */
+@media (max-width: 992px) {
+    .pj-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .pj-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pj-card {
+        height: 300px;
+    }
+}@media (max-width: 768px) {
+    .pj-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .pj-card {
+        width: 100%;
+        height: 320px;
+    }
+}
+  .pj-card { position: relative; height: 240px; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform .35s ease, box-shadow .35s ease; }
+  .pj-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 16px 40px rgba(0,0,0,.16); }
+  .pj-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease; display: block; }
+  .pj-card:hover img { transform: scale(1.08); }
+  .pj-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 18px 18px; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top,rgba(6,14,46,.9) 0%,rgba(0,60,130,.4) 50%,transparent 100%); transition: padding-bottom .3s; }
+  .pj-card:hover .pj-overlay { padding-bottom: 22px; }
+  .pj-badge { display: inline-block; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; background: linear-gradient(135deg,#0071bc,#1a3a7e); padding: 4px 11px; border-radius: 9999px; margin-bottom: 6px; width: fit-content; box-shadow: 0 3px 10px rgba(0,113,188,.4); }
+  .pj-name { font-family: 'Playfair Display', Georgia, serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 4px; }
+  .pj-loc { display: flex; align-items: center; gap: 4px; font-size: 11px; color: rgba(255,255,255,.75); font-weight: 500; }
+  .pj-card.hidden { display: none; }
+  .pj-cta { display: flex; justify-content: center; margin-top: 2rem; }
+  .pj-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 28px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #1a3a7e; background: transparent; border: 1.5px solid #93c0f5; cursor: pointer; transition: all .2s; }
+  .pj-cta-btn:hover { background: #eef5ff; border-color: #0071bc; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,113,188,.15); }
+  .pj-cta-btn:hover .arr { transform: translateX(4px); }
+  .arr { transition: transform .2s; display: inline-flex; }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<div class="pj">
+  <div class="pj-header">
+    <div class="pj-eye">Our Portfolio</div>
+    <h2 class="pj-title">Featured Projects</h2>
+    <p class="pj-sub">From residential homes to large commercial towers, our portfolio showcases our commitment to quality and innovation across Myanmar.</p>
+  </div>
+
+  <div class="pj-grid" id="pjGrid"></div>
+
+
+<script>
+const BASE = 'https://flyoverdesignandconstruction.github.io/Company-Website';
+const projects = [
+  { img: BASE+'/Asset/project-1.jpg', tag:'Commercial',  title:'Modern Office Tower',        loc:'Yangon, Myanmar' },
+  { img: BASE+'/Asset/project-2.jpg', tag:'Residential', title:'Luxury Residential Villa',    loc:'Naypyidaw, Myanmar' },
+  { img: BASE+'/Asset/project-3.jpg', tag:'Renovation',  title:'Heritage Hotel Renovation',   loc:'Mandalay, Myanmar' },
+  { img: BASE+'/Asset/project-4.jpg', tag:'Apartment',   title:'Contemporary Apartment',      loc:'Yangon, Myanmar' },
+  { img: BASE+'/Asset/project-5.jpg', tag:'Interior',    title:'Corporate Interior Design',   loc:'Yangon, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
+];
+const pin = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+const grid = document.getElementById('pjGrid');
+projects.forEach(p => {
+  const d = document.createElement('div');
+  d.className = 'pj-card'; d.dataset.tag = p.tag;
+  d.innerHTML = `<img src="${p.img}" alt="${p.title}" loading="lazy"><div class="pj-overlay"><span class="pj-badge">${p.tag}</span><div class="pj-name">${p.title}</div><div class="pj-loc">${pin} ${p.loc}</div></div>`;
+  grid.appendChild(d);
+});
+document.getElementById('pjFilters').addEventListener('click', e => {
+  const btn = e.target.closest('.pj-btn'); if (!btn) return;
+  document.querySelectorAll('.pj-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.f;
+  document.querySelectorAll('.pj-card').forEach(c => c.classList.toggle('hidden', f !== 'All' && c.dataset.tag !== f));
+});
+</script>
