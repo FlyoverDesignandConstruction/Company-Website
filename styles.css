@@ -147,7 +147,7 @@ h1, h2, h3, h4 {
 .card-desc.sm { font-size: 0.8rem; }
 em.accent-text { color: #80ccff; font-style: italic; }
 em.primary-italic { color: var(--primary-600); font-style: italic; }
-em.accent-italic { color: #80ccff; font-style: italic; }
+em.accent-italic { color: var(--gold-500); font-style: italic; }
 
 /* ── LAYOUT ─────────────────────────────────────────────────── */
 .container {
@@ -993,9 +993,8 @@ body.modal-open { overflow: hidden; }
   display: flex;
   align-items: center;
   gap: 0.4rem;
-}
 
-//* ── View All Button ── */
+   //* ── View All Button ── */
 
 .view-all-wrap {
   grid-column: 1 / -1;
@@ -1041,6 +1040,8 @@ body.modal-open { overflow: hidden; }
  
 .view-all-btn:hover svg {
   transform: translateX(4px);
+}
+
 }
 
 /* ── Reset & base ── */
@@ -1353,10 +1354,12 @@ body {
 .read-more-sm:hover { color: var(--primary-700); }
 
 /* ── View all button ── */
+
 .view-all-wrap {
+  grid-column: 1 / -1;
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  
 }
 
 .view-all-btn {
