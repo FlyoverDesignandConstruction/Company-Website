@@ -263,4 +263,96 @@
       if (open) closePopup(open);
     }
   });
+
+  const newsItems = [
+  {
+    id: 2,
+    category: 'Design Insights',
+    date: 'December 28, 2025',
+    title: "Sustainable Architecture: Building for Myanmar's Future",
+    excerpt: "Explore how Flyover Design & Construction is integrating sustainable building practices, eco-friendly materials, and energy-efficient designs into our latest projects across Myanmar.",
+    img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80',
+    alt: 'Sustainable green architecture building with eco-friendly design elements',
+    readTime: '5 min read'
+  },
+  {
+    id: 3,
+    category: 'Industry Update',
+    date: 'December 10, 2025',
+    title: "Interior Design Trends Shaping Myanmar's Spaces in 2026",
+    excerpt: "From biophilic design to minimalist aesthetics, discover the top interior design trends our team is incorporating into residential and commercial projects this year.",
+    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80',
+    alt: 'Modern interior design with minimalist aesthetics and natural elements',
+    readTime: '4 min read'
+  },
+  {
+    id: 4,
+    category: 'Project Spotlight',
+    date: 'November 22, 2025',
+    title: 'Heritage Hotel Renovation: Preserving History, Embracing Modernity',
+    excerpt: "A behind-the-scenes look at our award-winning Heritage Hotel Renovation project in Mandalay — blending historical preservation with contemporary comfort and functionality.",
+    img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80',
+    alt: 'Heritage hotel renovation project showing historical architecture with modern updates',
+    readTime: '6 min read'
+  },
+  {
+    id: 5,
+    category: 'Tips & Guides',
+    date: 'November 5, 2025',
+    title: 'How to Choose the Right Architectural Firm for Your Dream Home',
+    excerpt: "Building your dream home is one of the most significant investments you will make. Here are the key factors to consider when selecting an architectural and construction partner.",
+    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80',
+    alt: 'Architectural blueprints and design plans for residential home construction',
+    readTime: '7 min read'
+  },
+  {
+    id: 6,
+    category: 'Company News',
+    date: 'October 18, 2025',
+    title: 'Flyover Expands Operations to Mandalay with New Regional Office',
+    excerpt: "We are excited to announce the opening of our third regional office in Mandalay, strengthening our ability to serve clients across Upper Myanmar with the same excellence and dedication.",
+    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
+    alt: 'Modern office space interior of Flyover new Mandalay regional office',
+    readTime: '3 min read'
+  }
+];
+
+const categoryColors = {
+  'Company News':      'linear-gradient(135deg,#0071bc,#1a3a7e)',
+  'Design Insights':   'linear-gradient(135deg,#D4AF37,#b8941f)',
+  'Industry Update':   'linear-gradient(135deg,#06b6d4,#0891b2)',
+  'Project Spotlight': 'linear-gradient(135deg,#7c3aed,#5b21b6)',
+  'Tips & Guides':     'linear-gradient(135deg,#059669,#047857)'
+};
+
+const arrowSVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+</svg>`;
+
+const grid = document.getElementById('grid-posts');
+
+newsItems.forEach(item => {
+  const bg = categoryColors[item.category] || categoryColors['Company News'];
+  const article = document.createElement('article');
+  article.className = 'post-card';
+  article.innerHTML = `
+    <div class="post-img-wrap">
+      <img src="${item.img}" alt="${item.alt}" loading="lazy" />
+      <div class="post-img-overlay"></div>
+    </div>
+    <div class="post-body">
+      <div class="meta-row">
+        <span class="badge" style="background:${bg};">${item.category}</span>
+        <span class="read-time">${item.readTime}</span>
+      </div>
+      <h3 class="card-title-sm">${item.title}</h3>
+      <p class="card-excerpt-sm">${item.excerpt}</p>
+      <div class="post-footer">
+        <span class="card-date">${item.date}</span>
+        <button class="read-more-sm">Read More ${arrowSVG}</button>
+      </div>
+    </div>`;
+  grid.appendChild(article);
+});
+
 })();
