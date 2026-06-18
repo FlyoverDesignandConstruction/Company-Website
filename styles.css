@@ -995,6 +995,54 @@ body.modal-open { overflow: hidden; }
   gap: 0.4rem;
 }
 
+//* ── View All Button ── */
+
+.view-all-wrap {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+ 
+.view-all-btn {
+  display: block;
+  margin: 32px auto;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: 0.625rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: transparent;
+  border: 1.5px solid var(--primary-300);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+}
+ 
+.view-all-btn:hover {
+  background: var(--primary-50);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,113,188,0.15);
+}
+ 
+.view-all-btn svg {
+  transition: transform 0.25s ease;
+}
+ 
+.view-all-btn:hover svg {
+  transform: translateX(4px);
+}
+
 /* ── Reset & base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
