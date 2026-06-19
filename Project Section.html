@@ -1,43 +1,11 @@
 
 <style>
-  .pj { font-family: 'Inter', sans-serif; background: #fafbfd; padding: 3rem 1.5rem 3.5rem; }
-  .pj-header { text-align: center; margin-bottom: 2rem; }
-  .pj-eye { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #0071bc; background: linear-gradient(135deg,#f0f5ff,#e8f0ff); border: 1px solid #b8d0f7; border-radius: 9999px; padding: .35rem 1rem; margin-bottom: .75rem; }
-  .pj-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.5rem,3.5vw,2.25rem); font-weight: 700; color: #030712; line-height: 1.15; margin-bottom: .75rem; }
-  .pj-sub { font-size: .875rem; color: #6b7280; max-width: 30rem; margin: 0 auto; line-height: 1.75; }
-  .pj-filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 2rem; }
-  .pj-btn { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 6px 18px; border-radius: 9999px; border: 1px solid transparent; cursor: pointer; background: #f3f4f6; color: #4b5563; transition: all .2s; }
-  .pj-btn:hover { background: #e5e7eb; border-color: #d1d5db; }
-  .pj-btn.active { background: linear-gradient(135deg,#0071bc,#1a3a7e); color: #fff; box-shadow: 0 4px 14px rgba(0,113,188,.35); }
-  .pj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  /* Tablet */
-@media (max-width: 992px) {
-    .pj-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .pj-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .pj-card {
-        height: 300px;
-    }
-}@media (max-width: 768px) {
-    .pj-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .pj-card {
-        width: 100%;
-        height: 320px;
-    }
-}
+  .pj { padding: 4rem 1.5rem; background: #f9faff; }
+  .pj-header { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+  .pj-eye { font-size: 13px; font-weight: 600; color: #0071bc; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .pj-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; color: #1a3a7e; margin-bottom: 12px; }
+  .pj-sub { font-size: 15px; color: #4a4a4a; line-height: 1.6; }
+  .pj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
   .pj-card { position: relative; height: 240px; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform .35s ease, box-shadow .35s ease; }
   .pj-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 16px 40px rgba(0,0,0,.16); }
   .pj-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease; display: block; }
@@ -53,6 +21,24 @@
   .pj-cta-btn:hover { background: #eef5ff; border-color: #0071bc; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,113,188,.15); }
   .pj-cta-btn:hover .arr { transform: translateX(4px); }
   .arr { transition: transform .2s; display: inline-flex; }
+
+  /* Tablet */
+@media (max-width: 992px) {
+    .pj-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .pj-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .pj-card {
+        height: 300px;
+    }
+}
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
