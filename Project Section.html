@@ -1,87 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Flyover Design & Construction</title>
+  <meta name="description" content="Portfolio of featured projects by Flyover Design & Construction Co., Ltd. — commercial, residential, renovation, interior, and apartment projects across Myanmar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&display=swap" />
 
-<style>
-  .pj { padding: 4rem 1.5rem; background: #f9faff; }
-  .pj-header { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
-  .pj-eye { font-size: 13px; font-weight: 600; color: #0071bc; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-  .pj-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; color: #1a3a7e; margin-bottom: 12px; }
-  .pj-sub { font-size: 15px; color: #4a4a4a; line-height: 1.6; }
-  .pj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .pj-card { position: relative; height: 240px; border-radius: 20px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform .35s ease, box-shadow .35s ease; }
-  .pj-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 16px 40px rgba(0,0,0,.16); }
-  .pj-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease; display: block; }
-  .pj-card:hover img { transform: scale(1.08); }
-  .pj-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 18px 18px; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(to top,rgba(6,14,46,.9) 0%,rgba(0,60,130,.4) 50%,transparent 100%); transition: padding-bottom .3s; }
-  .pj-card:hover .pj-overlay { padding-bottom: 22px; }
-  .pj-badge { display: inline-block; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; background: linear-gradient(135deg,#0071bc,#1a3a7e); padding: 4px 11px; border-radius: 9999px; margin-bottom: 6px; width: fit-content; box-shadow: 0 3px 10px rgba(0,113,188,.4); }
-  .pj-name { font-family: 'Playfair Display', Georgia, serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 4px; }
-  .pj-loc { display: flex; align-items: center; gap: 4px; font-size: 11px; color: rgba(255,255,255,.75); font-weight: 500; }
-  .pj-card.hidden { display: none; }
-  .pj-cta { display: flex; justify-content: center; margin-top: 2rem; }
-  .pj-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 28px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #1a3a7e; background: transparent; border: 1.5px solid #93c0f5; cursor: pointer; transition: all .2s; }
-  .pj-cta-btn:hover { background: #eef5ff; border-color: #0071bc; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,113,188,.15); }
-  .pj-cta-btn:hover .arr { transform: translateX(4px); }
-  .arr { transition: transform .2s; display: inline-flex; }
-
-  /* Tablet */
-@media (max-width: 992px) {
-    .pj-grid {
-        grid-template-columns: repeat(2, 1fr);
+  <style>
+    /* ── RESET & BASE ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background-color: #fafbfd;
+      color: #18191f;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-}
+    img { display: block; max-width: 100%; height: auto; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-/* Mobile */
-@media (max-width: 768px) {
-    .pj-grid {
-        grid-template-columns: repeat(1, 1fr);
+    /* ── CSS VARIABLES ────────────────────────────────── */
+    :root {
+      --primary-50:  #f0f5ff;
+      --primary-100: #dce8fb;
+      --primary-200: #b8d0f7;
+      --primary-300: #82aff0;
+      --primary-600: #0071bc;
+      --primary-700: #1a4a9e;
+      --primary-800: #1a3a7e;
+      --primary-950: #060e2e;
+      --gold-500: #D4AF37;
+      --bg-50:  #fafbfd;
+      --bg-100: #f3f5f9;
+      --bg-200: #e5e9f2;
+      --bg-300: #c8cedf;
+      --fg-400: #8a8e9e;
+      --fg-500: #5d6278;
+      --fg-600: #464a5e;
+      --fg-700: #363a4f;
+      --fg-950: #0a0d1a;
+      --r-lg:  0.75rem;
+      --r-xl:  1rem;
+      --r-2xl: 1.25rem;
+      --r-3xl: 1.5rem;
+      --radius: 0.625rem;
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --shadow-xl: 0 20px 50px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.06);
+      --shadow-blue: 0 8px 30px rgba(0,113,188,0.35);
+      --grad-primary: linear-gradient(135deg, #0071bc 0%, #1a3a7e 100%);
     }
 
-    .pj-card {
-        height: 300px;
+    /* ── TYPOGRAPHY ───────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: "Playfair Display", Georgia, serif;
+      line-height: 1.15;
     }
-}
-</style>
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--fg-950);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .section-title.center { text-align: center; }
+    .section-desc {
+      font-size: 0.9375rem;
+      color: var(--fg-500);
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      line-height: 1.75;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    /* ── LAYOUT ───────────────────────────────────────── */
+    .container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    .section { padding: 6.5rem 0; }
+    .section-header { margin-bottom: 3.5rem; }
+    .section-header.center { text-align: center; }
+    .section-header .section-title { margin-top: 1rem; }
 
-<div class="pj">
-  <div class="pj-header">
-    <div class="pj-eye">Our Portfolio</div>
-    <h2 class="pj-title">Featured Projects</h2>
-    <p class="pj-sub">From residential homes to large commercial towers, our portfolio showcases our commitment to quality and innovation across Myanmar.</p>
-  </div>
+    /* ── GRID ─────────────────────────────────────────── */
+    .grid       { display: grid; }
+    .grid-1     { grid-template-columns: 1fr; }
+    .gap-md     { gap: 1.5rem; }
 
-  <div class="pj-grid" id="pjGrid"></div>
+    /* ── LABEL BADGE ──────────────────────────────────── */
+    .label-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-radius: 9999px;
+      padding: 0.4rem 1.1rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f0f5ff, #e8f0ff);
+      color: var(--primary-600);
+      border: 1px solid var(--primary-200);
+      box-shadow: 0 2px 8px rgba(0,113,188,0.1);
+    }
 
+    /* ── BUTTONS ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      line-height: 1;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.01em;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      opacity: 0;
+      transition: opacity 0.2s;
+      border-radius: inherit;
+    }
+    .btn:hover::before { opacity: 1; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--grad-primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-blue);
+    }
+    .btn-primary:hover { box-shadow: 0 12px 35px rgba(0,113,188,0.5); }
 
-<script>
-const BASE = 'https://flyoverdesignandconstruction.github.io/Company-Website';
-const projects = [
-  { img: BASE+'/Asset/project-1.jpg', tag:'Commercial',  title:'Modern Office Tower',        loc:'Yangon, Myanmar' },
-  { img: BASE+'/Asset/project-2.jpg', tag:'Residential', title:'Luxury Residential Villa',    loc:'Naypyidaw, Myanmar' },
-  { img: BASE+'/Asset/project-3.jpg', tag:'Renovation',  title:'Heritage Hotel Renovation',   loc:'Mandalay, Myanmar' },
-  { img: BASE+'/Asset/project-4.jpg', tag:'Apartment',   title:'Contemporary Apartment',      loc:'Yangon, Myanmar' },
-  { img: BASE+'/Asset/project-5.jpg', tag:'Interior',    title:'Corporate Interior Design',   loc:'Yangon, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-  { img: BASE+'/Asset/project-6.jpg', tag:'Commercial',  title:'Retail & Mixed-Use Building', loc:'Nay Pyi Taw, Myanmar' },
-];
-const pin = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
-const grid = document.getElementById('pjGrid');
-projects.forEach(p => {
-  const d = document.createElement('div');
-  d.className = 'pj-card'; d.dataset.tag = p.tag;
-  d.innerHTML = `<img src="${p.img}" alt="${p.title}" loading="lazy"><div class="pj-overlay"><span class="pj-badge">${p.tag}</span><div class="pj-name">${p.title}</div><div class="pj-loc">${pin} ${p.loc}</div></div>`;
-  grid.appendChild(d);
-});
-document.getElementById('pjFilters').addEventListener('click', e => {
-  const btn = e.target.closest('.pj-btn'); if (!btn) return;
-  document.querySelectorAll('.pj-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const f = btn.dataset.f;
-  document.querySelectorAll('.pj-card').forEach(c => c.classList.toggle('hidden', f !== 'All' && c.dataset.tag !== f));
-});
-</script>
+    /* Ripple */
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      transform: scale(0);
+      animation: ripple-anim 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+    /* ── FILTER ROW ───────────────────────────────────── */
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.45rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: all 0.25s;
+      background: var(--bg-100);
+      color: var(--fg-600);
+      border: 1px solid transparent;
+    }
+    .filter-btn:hover {
+      background: var(--bg-200);
+      border-color: var(--bg-300);
+    }
+    .filter-btn.active {
+      background: var(--grad-primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(0,113,188,0.35);
+      border-color: transparent;
+    }
+
+    /* ── PROJECT CARDS ────────────────────────────────── */
+    .project-card {
+      border-radius: var(--r-3xl);
+      overflow: hidden;
+      position: relative;
+      height: 420px;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      /* reveal start state */
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity    0.55s ease,
+        transform  0.55s ease,
+        box-shadow 0.35s ease;
+    }
+    .project-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card.revealed:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+    .project-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .project-card.revealed:hover img { transform: scale(1.08); }
+
+    .project-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 20px 22px 22px;
+      background: linear-gradient(
+        to top,
+        rgba(6,14,46,0.9) 0%,
+        rgba(0,60,130,0.4) 50%,
+        transparent 100%
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: padding 0.3s;
+    }
+    .project-card.revealed:hover .project-overlay { padding-bottom: 26px; }
+
+    .project-tag {
+      display: inline-block;
+      background: var(--grad-primary);
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+      box-shadow: 0 4px 12px rgba(0,113,188,0.4);
+    }
+    .project-title {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.125rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .project-loc {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ── VIEW ALL BUTTON WRAP ─────────────────────────── */
+    .view-all-wrap {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    /* ── MOBILE ADJUSTMENTS ───────────────────────────── */
+    @media (max-width: 480px) {
+      .section { padding: 3.5rem 0; }
+      .section-title { font-size: 1.7rem; margin-bottom: 1rem; }
+      .section-title.center { font-size: 1.7rem; }
+      .section-desc { font-size: 0.8125rem; }
+      .project-card { height: 14rem; }
+      .project-title { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════ PROJECTS SECTION ══════════════════ -->
+  <section id="projects" class="section">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="section-header center">
+        <div class="label-badge">Our Portfolio</div>
+        <h2 class="section-title center">Latest Featured Projects</h2>
+        <p class="section-desc">From residential homes to large commercial towers, our portfolio showcases our commitment to quality and innovation across Myanmar.</p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="filter-row" id="project-filters">
+        <button class="filter-btn active" data-filter="All">All</button>
+        <button class="filter-btn" data-filter="Commercial">Commercial</button>
+        <button class="filter-btn" data-filter="Residential">Residential</button>
+        <button class="filter-btn" data-filter="Renovation">Renovation</button>
+        <button class="filter-btn" data-filter="Interior">Interior</button>
+        <button class="filter-btn" data-filter="Apartment">Apartment</button>
+      </div>
+
+      <!-- Project Grid -->
+      <div class="grid grid-1 gap-md" id="projects-grid">
+
+        <div class="project-card" data-tag="Commercial">
+          <img src="Asset/project-1.jpg" alt="Modern Office Tower" loading="lazy" />
+          <div class="project-overlay">
+            <span class="project-tag">Commercial</span>
+            <h3 class="project-title">Modern Office Tower</h3>
+            <p class="project-loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Yangon, Myanmar
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card" data-tag="Residential">
+          <img src="Asset/project-2.jpg" alt="Luxury Residential Villa" loading="lazy" />
+          <div class="project-overlay">
+            <span class="project-tag">Residential</span>
+            <h3 class="project-title">Luxury Residential Villa</h3>
+            <p class="project-loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Naypyidaw, Myanmar
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card" data-tag="Renovation">
+          <img src="Asset/project-3.jpg" alt="Heritage Hotel Renovation" loading="lazy" />
+          <div class="project-overlay">
+            <span class="project-tag">Renovation</span>
+            <h3 class="project-title">Heritage Hotel Renovation</h3>
+            <p class="project-loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Mandalay, Myanmar
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card" data-tag="Apartment">
+          <img src="Asset/project-4.jpg" alt="Contemporary Apartment" loading="lazy" />
+          <div class="project-overlay">
+            <span class="project-tag">Apartment</span>
+            <h3 class="project-title">Contemporary Apartment</h3>
+            <p class="project-loc">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Yangon, Myanmar
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /#projects-grid -->
+
+  </section>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // ── PROJECT FILTER ─────────────────────────────────────
+      const filterBtns   = document.querySelectorAll(".filter-btn");
+      const projectCards = document.querySelectorAll("#projects-grid .project-card");
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.getAttribute("data-filter");
+          filterBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          projectCards.forEach((card) => {
+            const tag  = card.getAttribute("data-tag");
+            const show = filter === "All" || tag === filter;
+            card.style.display = show ? "" : "none";
+
+            if (show) {
+              // Re-trigger entrance animation on filter
+              card.classList.remove("revealed");
+              void card.offsetWidth; // force reflow
+              requestAnimationFrame(() => {
+                card.style.transition = "opacity 0.4s ease, transform 0.4s ease, box-shadow 0.35s ease";
+                card.classList.add("revealed");
+              });
+            }
+          });
+        });
+      });
+
+      // ── SCROLL-REVEAL (staggered entrance) ─────────────────
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add("revealed");
+            }, (i % 6) * 90);
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+
+      projectCards.forEach((el) => revealObserver.observe(el));
+
+      // ── RIPPLE ON PRIMARY BUTTONS ──────────────────────────
+      document.querySelectorAll(".btn-primary").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          const rect   = btn.getBoundingClientRect();
+          const size   = Math.max(rect.width, rect.height);
+          const x      = e.clientX - rect.left - size / 2;
+          const y      = e.clientY - rect.top  - size / 2;
+          const ripple = document.createElement("span");
+          ripple.className = "ripple-effect";
+          ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 700);
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
