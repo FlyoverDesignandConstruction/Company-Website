@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News &amp; Blog – Flyover Design &amp; Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+ 
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f5f9;
+      color: #1a1d2e;
+    }
+ 
+    /* ── CSS custom properties (mapped from Tailwind classes) ── */
+    :root {
+      --primary-50:  #eef5ff;
+      --primary-300: #93c0f5;
+      --primary-600: #0071bc;
+      --primary-700: #1a3a7e;
+      --fg-400:      #9ca3af;
+      --fg-500:      #6b7280;
+      --fg-900:      #111827;
+      --fg-950:      #030712;
+      --bg-200:      #e5e7eb;
+      --radius-card: 1.5rem;
+      --shadow-card: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-hover: 0 20px 50px rgba(0,0,0,.12);
+    }
+ 
+    /* ── Section wrapper ── */
+    #news {
+      padding: 6.5rem 0;
+      background: #f3f5f9;
+    }
+ 
+    .container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+ 
+    /* ── Section header ── */
+    .news-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+ 
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary-600);
+      background: linear-gradient(135deg, #f0f5ff, #e8f0ff);
+      border: 1px solid #b8d0f7;
+      border-radius: 9999px;
+      padding: 0.4rem 1.1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,113,188,.1);
+    }
+ 
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      color: var(--fg-950);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+ 
+    .section-sub {
+      font-size: 0.9375rem;
+      color: var(--fg-500);
+      max-width: 32rem;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+ 
+    /* ── Featured post ── */
+    .featured-wrapper {
+      margin-bottom: 2rem;
+    }
+ 
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,.1);
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+ 
+    .featured-card:hover {
+      box-shadow: 0 20px 50px rgba(0,0,0,.15);
+      transform: translateY(-4px);
+    }
+ 
+    @media (min-width: 1024px) {
+      .featured-card {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+ 
+    .featured-img-wrap {
+      position: relative;
+      min-height: 20rem;
+      overflow: hidden;
+    }
+ 
+    .featured-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+ 
+    .featured-card:hover .featured-img-wrap img {
+      transform: scale(1.05);
+    }
+ 
+    .featured-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(6,14,46,.3) 0%, transparent 100%);
+    }
+ 
+    .featured-body {
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+ 
+    /* ── Category badge ── */
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+ 
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+ 
+    .read-time {
+      font-size: 0.75rem;
+      color: var(--fg-400);
+    }
+ 
+    .card-title-lg {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--fg-950);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+ 
+    .card-excerpt {
+      font-size: 0.875rem;
+      color: var(--fg-500);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+ 
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+ 
+    .card-date {
+      font-size: 0.75rem;
+      color: var(--fg-400);
+    }
+ 
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary-600);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+ 
+    .read-more-btn:hover { color: var(--primary-700); }
+ 
+    /* ── Grid cards ── */
+    .grid-posts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+ 
+    @media (min-width: 640px) {
+      .grid-posts { grid-template-columns: repeat(2, 1fr); }
+    }
+ 
+    @media (min-width: 1024px) {
+      .grid-posts { grid-template-columns: repeat(3, 1fr); }
+    }
+ 
+    .post-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--bg-200);
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+ 
+    .post-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: transparent;
+    }
+ 
+    .post-img-wrap {
+      position: relative;
+      height: 13rem;
+      overflow: hidden;
+    }
+ 
+    .post-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+ 
+    .post-card:hover .post-img-wrap img {
+      transform: scale(1.08);
+    }
+ 
+    .post-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,14,46,.5) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+ 
+    .post-card:hover .post-img-overlay {
+      opacity: 1;
+    }
+ 
+    .post-body {
+      padding: 1.5rem;
+    }
+ 
+    .card-title-sm {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--fg-900);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+ 
+    .card-excerpt-sm {
+      font-size: 0.8rem;
+      color: var(--fg-500);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+ 
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--bg-200);
+      padding-top: 1rem;
+    }
+ 
+    .read-more-sm {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary-600);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+ 
+    .read-more-sm:hover { color: var(--primary-700); }
+ 
+    /* ── View all button ── */
+    .view-all-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+ 
+    .view-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border-radius: 0.625rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary-700);
+      background: transparent;
+      border: 1px solid var(--primary-300);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+ 
+    .view-all-btn:hover {
+      background: var(--primary-50);
+      border-color: var(--primary-600);
+      transform: translateY(-2px);
+    }
+ 
+    /* ── Modal overlay ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(3, 7, 18, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+ 
+    .modal-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+ 
+    /* ── Modal panel ── */
+    .modal-panel {
+      position: relative;
+      width: 100%;
+      max-width: 48rem;
+      max-height: 90vh;
+      background: #fff;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+ 
+    .modal-overlay.is-open .modal-panel {
+      transform: translateY(0) scale(1);
+    }
+ 
+    /* ── Modal hero image ── */
+    .modal-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 15rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+ 
+    .modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+ 
+    .modal-img-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(3,7,18,0.7) 0%, rgba(3,7,18,0.15) 50%, transparent 100%);
+    }
+ 
+    .modal-img-meta {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.75rem;
+      right: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+ 
+    /* ── Modal close button ── */
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10;
+    }
+ 
+    .modal-close:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+ 
+    /* ── Modal scrollable body ── */
+    .modal-body {
+      padding: 2rem 2rem 2.5rem;
+      overflow-y: auto;
+      flex: 1;
+      scrollbar-width: thin;
+      scrollbar-color: var(--bg-200) transparent;
+    }
+ 
+    .modal-body::-webkit-scrollbar { width: 5px; }
+    .modal-body::-webkit-scrollbar-track { background: transparent; }
+    .modal-body::-webkit-scrollbar-thumb { background: var(--bg-200); border-radius: 4px; }
+ 
+    .modal-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.25rem, 3vw, 1.625rem);
+      font-weight: 700;
+      color: var(--fg-950);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+ 
+    .modal-date-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--bg-200);
+    }
+ 
+    .modal-date-row .card-date {
+      font-size: 0.8rem;
+      color: var(--fg-400);
+    }
+ 
+    .modal-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--bg-200);
+    }
+ 
+    .modal-article {
+      font-size: 0.9rem;
+      color: var(--fg-500);
+      line-height: 1.85;
+    }
+ 
+    .modal-article p { margin-bottom: 1.1rem; }
+    .modal-article p:last-child { margin-bottom: 0; }
+ 
+    .modal-article h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--fg-900);
+      margin: 1.5rem 0 0.6rem;
+    }
+ 
+    .modal-article ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1.1rem;
+    }
+ 
+    .modal-article ul li {
+      margin-bottom: 0.4rem;
+    }
+ 
+    /* ── Modal footer ── */
+    .modal-footer {
+      padding: 1rem 2rem 1.5rem;
+      border-top: 1px solid var(--bg-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+ 
+    .modal-share {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--fg-400);
+      font-weight: 500;
+    }
+ 
+    .share-btn {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid var(--bg-200);
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--fg-500);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+ 
+    .share-btn:hover {
+      border-color: var(--primary-600);
+      color: var(--primary-600);
+      background: var(--primary-50);
+    }
+ 
+    .modal-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+ 
+    .modal-cta:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+ 
+    /* ── body scroll lock ── */
+    body.modal-open {
+      overflow: hidden;
+    }
+ 
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .modal-overlay, .modal-panel { transition: none; }
+    }
+  </style>
+</head>
+<body>
+ 
+<section id="news">
+  <div class="container">
+ 
+    <!-- Header -->
+    <div class="news-header">
+      <span class="eyebrow">Latest Updates</span>
+      <h2 class="section-title">News &amp; Blog</h2>
+      <p class="section-sub">
+        Stay informed with the latest news, project spotlights, design insights,
+        and industry updates from Flyover Design &amp; Construction.
+      </p>
+    </div>
+ 
+    <!-- Featured Post -->
+    <div class="featured-wrapper">
+      <div class="featured-card" id="featured-card">
+        <div class="featured-img-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80"
+            alt="Modern commercial office tower building exterior in Yangon Myanmar"
+          />
+          <div class="featured-img-overlay"></div>
+        </div>
+        <div class="featured-body">
+          <div class="meta-row">
+            <span class="badge" style="background: linear-gradient(135deg,#0071bc,#1a3a7e);">Company News</span>
+            <span class="read-time">3 min read</span>
+          </div>
+          <h3 class="card-title-lg">Flyover Completes Landmark Commercial Tower in Yangon</h3>
+          <p class="card-excerpt">
+            We are proud to announce the successful completion of a 12-story commercial office
+            tower in the heart of Yangon, setting a new benchmark for modern architecture in Myanmar.
+          </p>
+          <div class="card-footer">
+            <span class="card-date">January 15, 2026</span>
+            <button class="read-more-btn">
+              Read More
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Grid Posts -->
+    <div class="grid-posts" id="grid-posts"></div>
+ 
+</section>
+ 
+<!-- ── Article Modal ── -->
+<div class="modal-overlay" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel">
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="" />
+      <div class="modal-img-gradient"></div>
+      <div class="modal-img-meta">
+        <span class="badge" id="modalBadge"></span>
+        <span class="read-time" style="color:rgba(255,255,255,0.8);" id="modalReadTime"></span>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close article">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-date-row">
+        <span class="card-date" id="modalDate"></span>
+        <div class="modal-divider"></div>
+        <span class="card-date" id="modalAuthor"></span>
+      </div>
+      <div class="modal-article" id="modalArticle"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-share">
+        <span>Share:</span>
+        <button class="share-btn" title="Copy link" onclick="copyModalLink()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </button>
+        <button class="share-btn" title="Share on Facebook">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </button>
+        <button class="share-btn" title="Share on LinkedIn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </button>
+      </div>
+      <a href="#contact" class="modal-cta" id="modalCtaBtn" onclick="closeModal()">
+        Contact Us About This
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+ 
+<script>
+  /* ─── Full article content ─── */
+  const allArticles = [
+    {
+      id: 1,
+      category: 'Company News',
+      date: 'January 15, 2026',
+      author: 'Flyover Editorial',
+      title: 'Flyover Completes Landmark Commercial Tower in Yangon',
+      excerpt: 'We are proud to announce the successful completion of a 12-story commercial office tower in the heart of Yangon, setting a new benchmark for modern architecture in Myanmar.',
+      img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+      alt: 'Modern commercial office tower building exterior in Yangon Myanmar',
+      readTime: '3 min read',
+      content: `
+        <p>Flyover Design & Construction Co., Ltd. is proud to announce the successful completion of the Thanlwin Commercial Tower — a landmark 12-story office complex situated in the bustling commercial district of downtown Yangon.</p>
+        <h4>A New Benchmark for Myanmar Architecture</h4>
+        <p>The tower represents a significant milestone for the firm and for modern architecture in Myanmar. Designed with a focus on functionality, sustainability, and visual presence, the building features floor-to-ceiling glazing, a double-skin facade for thermal performance, and flexible open-plan floor plates that accommodate a range of tenants from tech startups to multinational corporations.</p>
+        <p>The project spanned 28 months from groundbreaking to handover. Our integrated design-build model allowed structural, MEP, and interior teams to coordinate in real time, reducing rework and delivering the project on schedule and within budget.</p>
+        <h4>Key Project Highlights</h4>
+        <ul>
+          <li>12 stories, 18,400 sqm total gross floor area</li>
+          <li>Class A office spaces across floors 3–11</li>
+          <li>Ground-floor retail arcade and landscaped forecourt</li>
+          <li>Rooftop terrace with panoramic city views</li>
+          <li>4-level basement car park with 220 bays</li>
+          <li>CCTV, BMS, and smart access control integration</li>
+        </ul>
+        <h4>What's Next</h4>
+        <p>The Thanlwin Commercial Tower is now open for tenant fit-out and will officially welcome its first occupants in Q2 2026. We extend our deepest gratitude to the client, our consultants, sub-contractors, and the entire Flyover team for bringing this vision to life.</p>
+      `
+    },
+    {
+      id: 2,
+      category: 'Design Insights',
+      date: 'December 28, 2025',
+      author: 'Aung Thu, Design Lead',
+      title: "Sustainable Architecture: Building for Myanmar's Future",
+      excerpt: "Explore how Flyover Design & Construction is integrating sustainable building practices, eco-friendly materials, and energy-efficient designs into our latest projects across Myanmar.",
+      img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80',
+      alt: 'Sustainable green architecture building with eco-friendly design elements',
+      readTime: '5 min read',
+      content: `
+        <p>Sustainability is no longer an optional add-on for construction projects — it is increasingly a client requirement, a regulatory expectation, and above all, the right thing to do. At Flyover, we have spent the last two years embedding sustainable principles into every phase of our design-build process.</p>
+        <h4>Passive Design First</h4>
+        <p>Before specifying any mechanical system, our design team evaluates passive strategies: building orientation, window-to-wall ratios, shading devices, and natural ventilation paths. In Myanmar's tropical climate, a well-oriented building can reduce cooling loads by 25–35% compared to a poorly sited one. This is the cheapest energy saving of all — it costs nothing to rotate a floor plan.</p>
+        <h4>Materials with Lower Embodied Carbon</h4>
+        <p>We have been steadily increasing our use of locally sourced materials to cut transportation emissions. Brickwork from regional kilns, timber certified by responsible forestry schemes, and recycled aggregate in non-structural concrete are now standard specifications on eligible projects.</p>
+        <ul>
+          <li>Local brick and masonry: reduces transport carbon by up to 60%</li>
+          <li>Fly-ash blended cement: cuts clinker demand and CO₂</li>
+          <li>Recycled steel from regional mills where structural grades permit</li>
+        </ul>
+        <h4>Water & Energy</h4>
+        <p>Rainwater harvesting systems are now included in all new commercial projects above 3,000 sqm. Combined with low-flow fixtures, this has reduced potable water consumption on delivered buildings by an average of 40%. On the energy side, we partner with M&E consultants who target a minimum Energy Use Intensity (EUI) reduction of 20% against local baseline.</p>
+        <p>We believe Myanmar's construction industry stands at an inflection point. The choices made in the next decade will shape the built environment — and the carbon footprint — of cities like Yangon and Naypyidaw for generations. We are committed to leading that change.</p>
+      `
+    },
+    {
+      id: 3,
+      category: 'Industry Update',
+      date: 'December 10, 2025',
+      author: 'Ei Phyu, Interior Studio',
+      title: "Interior Design Trends Shaping Myanmar's Spaces in 2026",
+      excerpt: "From biophilic design to minimalist aesthetics, discover the top interior design trends our team is incorporating into residential and commercial projects this year.",
+      img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80',
+      alt: 'Modern interior design with minimalist aesthetics and natural elements',
+      readTime: '4 min read',
+      content: `
+        <p>Myanmar's interior design landscape is shifting. Clients who once prioritised ornate finishes and heavy wooden furniture are increasingly drawn to cleaner, calmer environments that reflect global sensibilities while remaining rooted in local craft traditions. Here are the key trends shaping our projects this year.</p>
+        <h4>1. Biophilic Integration</h4>
+        <p>The desire to bring the outside in has never been stronger. We are specifying living walls, interior planting at scale, and natural stone features more than ever. In a country with such rich botanical diversity, this is one trend that feels genuinely local rather than imported.</p>
+        <h4>2. Warm Minimalism</h4>
+        <p>Pure white minimalism has given way to warmer, more textured interpretations — think limewash plaster walls, teak and bamboo accents, terracotta tile flooring, and muted clay palette lighting. The result feels collected rather than curated, which clients find more liveable.</p>
+        <h4>3. Flexible, Multi-Modal Spaces</h4>
+        <p>Post-pandemic, commercial clients in particular want spaces that transition between focus work, collaboration, and social functions without physical reconfiguration. Moveable partitions, acoustic pods, and modular furniture systems are now a standard part of our commercial interior offering.</p>
+        <h4>4. Craftsmanship as Feature</h4>
+        <p>Myanmar has extraordinary artisanal craft traditions — lacquerware, hand-woven textiles, silver and bronze work. We have been working with local craftspeople to commission bespoke pieces that become signature elements of a space: a hand-beaten copper reception desk, a lacquerware feature wall, custom woven ceiling panels. Clients love the story; we love that it supports local industry.</p>
+        <p>If you are planning a residential or commercial interior project in 2026, our interior studio would love to discuss how these trends can be applied to your brief.</p>
+      `
+    },
+    {
+      id: 4,
+      category: 'Project Spotlight',
+      date: 'November 22, 2025',
+      author: 'Zin Mar, Project Lead',
+      title: 'Heritage Hotel Renovation: Preserving History, Embracing Modernity',
+      excerpt: "A behind-the-scenes look at our award-winning Heritage Hotel Renovation project in Mandalay — blending historical preservation with contemporary comfort and functionality.",
+      img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
+      alt: 'Heritage hotel renovation project showing historical architecture with modern updates',
+      readTime: '6 min read',
+      content: `
+        <p>When the owners of a colonial-era guesthouse in Mandalay approached Flyover with a brief to "make it feel like now without losing what it is," we knew we were in for one of the most demanding — and rewarding — projects of recent years. The result, completed in September 2025, has since won a regional Heritage Conservation Award.</p>
+        <h4>The Challenge</h4>
+        <p>The building, originally constructed in 1931, had been sympathetically maintained but never modernised. The brief was to add 18 new rooms, a spa, a rooftop bar, and contemporary bathrooms throughout, without disturbing the original teak structure, colonial facade, or the mature garden that gives the property its character.</p>
+        <h4>Our Approach</h4>
+        <p>We began with a full structural survey and materials audit. Wherever original teak joinery, terrazzo floors, or decorative plasterwork remained in serviceable condition, we restored rather than replaced. Where damage was too severe, we sourced period-matched materials — including hand-made clay roof tiles produced to the original dimensions by a local kiln in Sagaing.</p>
+        <p>New interventions — the spa pavilion, rooftop structure, and extension wing — were designed in a contemporary language that complements rather than imitates the original. Clear glass and white-painted steel read as clearly new, which actually protects the integrity of the historic fabric by not pretending to be something they are not.</p>
+        <h4>Selected Results</h4>
+        <ul>
+          <li>100% of original teak structural members retained</li>
+          <li>Original 1930s terrazzo floors restored across 1,200 sqm</li>
+          <li>18 new guest rooms added in a sympathetic extension</li>
+          <li>Rooftop bar with views over Mandalay Hill</li>
+          <li>Award: ASEAN Heritage Architecture Prize, Conservation Category, 2025</li>
+        </ul>
+        <p>This project reminded us why heritage work matters. Buildings like this are irreplaceable cultural assets. When we can help an owner unlock their commercial value without diminishing their historical significance, that is design at its most purposeful.</p>
+      `
+    },
+    {
+      id: 5,
+      category: 'Tips & Guides',
+      date: 'November 5, 2025',
+      author: 'Flyover Editorial',
+      title: 'How to Choose the Right Architectural Firm for Your Dream Home',
+      excerpt: "Building your dream home is one of the most significant investments you will make. Here are the key factors to consider when selecting an architectural and construction partner.",
+      img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
+      alt: 'Architectural blueprints and design plans for residential home construction',
+      readTime: '7 min read',
+      content: `
+        <p>Choosing an architect and builder for your home is one of the most consequential decisions you will make. The right partner will translate your vision into a home that fits your life; the wrong one can mean years of frustration and budget overruns. Here is what to look for.</p>
+        <h4>1. Portfolio Fit, Not Just Portfolio Size</h4>
+        <p>A firm with fifty completed luxury villas may not be the right choice for a compact urban townhouse — or vice versa. Look for projects in their portfolio that resemble yours in scale, brief, and budget. Ask specifically what their role was: full design and build, design only, or supervision? The answer matters.</p>
+        <h4>2. Integration of Design and Construction</h4>
+        <p>Some firms separate design from construction: the architect draws, the contractor builds, and the client manages the gap between them. An integrated design-build firm carries responsibility for both — meaning fewer disputes, faster decisions, and a single point of accountability. For most clients building their first home, this integration is invaluable.</p>
+        <h4>3. Transparency on Fees and Costs</h4>
+        <p>Be cautious of firms that cannot give you a clear fee structure up front, or that provide cost estimates that seem suspiciously low early in the process. Reputable firms will be transparent about their fee basis, what it includes, and how cost control works across the project lifecycle.</p>
+        <h4>4. Communication Style</h4>
+        <p>You will work with your architect for 12–36 months. Their technical competence matters enormously, but so does their ability to explain complex decisions clearly, listen to your priorities, and handle difficult conversations calmly. A site visit or introductory meeting tells you more about this than any brochure.</p>
+        <h4>5. References from Past Clients</h4>
+        <p>Always ask for two or three client references, and actually call them. Ask not just whether they were happy with the result, but whether the process was what they expected, whether costs were managed well, and whether they would hire the firm again. The answers are usually illuminating.</p>
+        <p>At Flyover, we welcome introductory conversations with no obligation. If you have a project in mind and want to understand whether we are the right fit, reach out to our residential team.</p>
+      `
+    },
+    {
+      id: 6,
+      category: 'Company News',
+      date: 'October 18, 2025',
+      author: 'Flyover Editorial',
+      title: 'Flyover Expands Operations to Mandalay with New Regional Office',
+      excerpt: "We are excited to announce the opening of our third regional office in Mandalay, strengthening our ability to serve clients across Upper Myanmar with the same excellence and dedication.",
+      img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+      alt: 'Modern office space interior of Flyover new Mandalay regional office',
+      readTime: '3 min read',
+      content: `
+        <p>Flyover Design & Construction Co., Ltd. is pleased to announce the opening of our Mandalay Regional Office, marking our third permanent location following our headquarters in Naypyidaw and our Yangon studio.</p>
+        <h4>Why Mandalay?</h4>
+        <p>Mandalay is Myanmar's second-largest city and the economic heartland of Upper Myanmar. Over the past three years, we have completed seven significant projects in the region — including the Heritage Hotel Renovation, two residential estates, and a commercial mixed-use development — managing all of them from our Naypyidaw headquarters. The volume of enquiries from Mandalay-based clients has grown consistently, and it became clear that a local presence would allow us to serve those clients better and pursue opportunities that require on-the-ground coordination.</p>
+        <h4>The New Office</h4>
+        <p>Our Mandalay studio occupies 380 sqm on the third floor of a commercial building in the 26th Street business district. It houses a design studio, a client meeting suite, a material library, and a project coordination area for on-site project managers. The space was designed by our own interior team — a fitting use of our own expertise.</p>
+        <h4>Our Mandalay Team</h4>
+        <p>The office is headed by Senior Project Director Ko Kyaw Zin Latt, who has managed construction projects in Upper Myanmar for over a decade. He is joined by two architects, a structural engineer, an interior designer, and a project administrator. We intend to grow the team to twelve by end of 2026.</p>
+        <p>If you are based in Mandalay or the surrounding region and have a project you would like to discuss, please contact our new office directly. We look forward to building relationships in the community.</p>
+      `
+    }
+  ];
+ 
+  const categoryColors = {
+    'Company News':     'linear-gradient(135deg,#0071bc,#1a3a7e)',
+    'Design Insights':  'linear-gradient(135deg,#D4AF37,#b8941f)',
+    'Industry Update':  'linear-gradient(135deg,#06b6d4,#0891b2)',
+    'Project Spotlight':'linear-gradient(135deg,#7c3aed,#5b21b6)',
+    'Tips & Guides':    'linear-gradient(135deg,#059669,#047857)'
+  };
+ 
+  const arrowSVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+  </svg>`;
+ 
+  /* ─── Build grid cards ─── */
+  const gridItems = allArticles.filter(a => a.id !== 1);
+  const grid = document.getElementById('grid-posts');
+ 
+  gridItems.forEach(item => {
+    const bg = categoryColors[item.category] || categoryColors['Company News'];
+    const article = document.createElement('article');
+    article.className = 'post-card';
+    article.innerHTML = `
+      <div class="post-img-wrap">
+        <img src="${item.img}" alt="${item.alt}" loading="lazy" />
+        <div class="post-img-overlay"></div>
+      </div>
+      <div class="post-body">
+        <div class="meta-row">
+          <span class="badge" style="background:${bg};">${item.category}</span>
+          <span class="read-time">${item.readTime}</span>
+        </div>
+        <h3 class="card-title-sm">${item.title}</h3>
+        <p class="card-excerpt-sm">${item.excerpt}</p>
+        <div class="post-footer">
+          <span class="card-date">${item.date}</span>
+          <button class="read-more-sm" data-id="${item.id}">Read More ${arrowSVG}</button>
+        </div>
+      </div>`;
+    grid.appendChild(article);
+  });
+ 
+  /* ─── Modal logic ─── */
+  const overlay  = document.getElementById('articleModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalBadge   = document.getElementById('modalBadge');
+  const modalReadTime = document.getElementById('modalReadTime');
+  const modalTitle   = document.getElementById('modalTitle');
+  const modalDate    = document.getElementById('modalDate');
+  const modalAuthor  = document.getElementById('modalAuthor');
+  const modalArticle = document.getElementById('modalArticle');
+ 
+  function openModal(id) {
+    const post = allArticles.find(a => a.id === id);
+    if (!post) return;
+    const bg = categoryColors[post.category] || categoryColors['Company News'];
+    modalImg.src    = post.img;
+    modalImg.alt    = post.alt;
+    modalBadge.textContent = post.category;
+    modalBadge.style.background = bg;
+    modalReadTime.textContent   = post.readTime;
+    modalTitle.textContent  = post.title;
+    modalDate.textContent   = post.date;
+    modalAuthor.textContent = post.author;
+    modalArticle.innerHTML  = post.content;
+    overlay.classList.add('is-open');
+    document.body.classList.add('modal-open');
+    /* Reset scroll */
+    overlay.querySelector('.modal-body').scrollTop = 0;
+    /* Focus trap: focus close button */
+    document.getElementById('modalClose').focus();
+  }
+ 
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+  }
+ 
+  /* Featured card click */
+  document.getElementById('featured-card').addEventListener('click', function(e) {
+    openModal(1);
+  });
+ 
+  /* Grid card Read More buttons */
+  document.getElementById('grid-posts').addEventListener('click', function(e) {
+    const btn = e.target.closest('[data-id]');
+    if (btn) openModal(Number(btn.dataset.id));
+  });
+ 
+  /* Close button */
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+ 
+  /* Click outside panel to close */
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+ 
+  /* Escape key */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+ 
+  /* Copy link utility */
+  function copyModalLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = event.currentTarget;
+      const orig = btn.innerHTML;
+      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+      setTimeout(() => { btn.innerHTML = orig; }, 1800);
+    });
+  }
+</script>
+ 
+</body>
+</html>
