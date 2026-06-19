@@ -333,24 +333,25 @@ const arrowSVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" st
 const grid = document.getElementById('grid-posts');
 
 newsItems.forEach(item => {
-  const bg = categoryColors[item.category] || categoryColors['Company News'];
-  const article = document.createElement('article');
-  article.className = 'post-card';
-  article.innerHTML = `
-    <div class="post-img-wrap">
-      <img src="${item.img}" alt="${item.alt}" loading="lazy" />
-      <div class="post-img-overlay"></div>
-    </div>
-    <div class="post-body">
-      <div class="meta-row">
-        <span class="badge" style="background:${bg};">${item.category}</span>
+    const bg = categoryColors[item.category] || categoryColors['Company News'];
+    const article = document.createElement('article');
+    article.className = 'post-card';
+    article.innerHTML = `
+      <div class="post-img-wrap">
+        <img src="${item.img}" alt="${item.alt}" loading="lazy" />
+        <div class="post-img-overlay"></div>
       </div>
-      <h3 class="card-title-sm">${item.title}</h3>
-      <p class="card-excerpt-sm">${item.excerpt}</p>
-      <div class="post-footer">
-        <span class="card-date">${item.date}</span>
-      </div>
-    </div>`;
+      <div class="post-body">
+        <div class="meta-row">
+          <span class="badge" style="background:${bg};">${item.category}</span>
+          <span class="read-time">${item.readTime}</span>
+        </div>
+        <h3 class="card-title-sm">${item.title}</h3>
+        <p class="card-excerpt-sm">${item.excerpt}</p>
+        <div class="post-footer">
+          <span class="card-date">${item.date}</span>
+          <button class="read-more-sm">Read More ${arrowSVG}</button>
+      </div>`;
   grid.appendChild(article);
 });
 
