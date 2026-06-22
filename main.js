@@ -251,7 +251,7 @@
     btn.addEventListener("click", () => closePopup(btn.closest("[role='dialog']")));
   });
 
-  document.querySelectorAll("[role='dialog']").forEach((dialog) => {
+  document.querySelectorAll("[role='dialog']:not(#articleModal)").forEach((dialog) => {
     dialog.addEventListener("click", (e) => {
       if (e.target === dialog) closePopup(dialog);
     });
@@ -259,63 +259,158 @@
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      const open = document.querySelector("[role='dialog'].is-open");
+      const open = document.querySelector("[role='dialog'].is-open:not(#articleModal)");
       if (open) closePopup(open);
     }
   });
 
-  const newsItems = [
+  const allArticles = [
+  {
+    id: 1,
+    category: 'Company News',
+    date: 'January 15, 2026',
+    author: 'Flyover Editorial',
+    title: 'Flyover Completes Landmark Commercial Tower in Yangon',
+    excerpt: 'We are proud to announce the successful completion of a 12-story commercial office tower in the heart of Yangon, setting a new benchmark for modern architecture in Myanmar.',
+    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    alt: 'Modern commercial office tower building exterior in Yangon Myanmar',
+    readTime: '3 min read',
+    content: `
+      <p>Flyover Design &amp; Construction Co., Ltd. is proud to announce the successful completion of the Thanlwin Commercial Tower — a landmark 12-story office complex situated in the bustling commercial district of downtown Yangon.</p>
+      <h4>A New Benchmark for Myanmar Architecture</h4>
+      <p>The tower represents a significant milestone for the firm and for modern architecture in Myanmar. Designed with a focus on functionality, sustainability, and visual presence, the building features floor-to-ceiling glazing, a double-skin facade for thermal performance, and flexible open-plan floor plates that accommodate a range of tenants from tech startups to multinational corporations.</p>
+      <p>The project spanned 28 months from groundbreaking to handover. Our integrated design-build model allowed structural, MEP, and interior teams to coordinate in real time, reducing rework and delivering the project on schedule and within budget.</p>
+      <h4>Key Project Highlights</h4>
+      <ul>
+        <li>12 stories, 18,400 sqm total gross floor area</li>
+        <li>Class A office spaces across floors 3–11</li>
+        <li>Ground-floor retail arcade and landscaped forecourt</li>
+        <li>Rooftop terrace with panoramic city views</li>
+        <li>4-level basement car park with 220 bays</li>
+        <li>CCTV, BMS, and smart access control integration</li>
+      </ul>
+      <h4>What's Next</h4>
+      <p>The Thanlwin Commercial Tower is now open for tenant fit-out and will officially welcome its first occupants in Q2 2026. We extend our deepest gratitude to the client, our consultants, sub-contractors, and the entire Flyover team for bringing this vision to life.</p>
+    `
+  },
   {
     id: 2,
     category: 'Design Insights',
     date: 'December 28, 2025',
+    author: 'Aung Thu, Design Lead',
     title: "Sustainable Architecture: Building for Myanmar's Future",
     excerpt: "Explore how Flyover Design & Construction is integrating sustainable building practices, eco-friendly materials, and energy-efficient designs into our latest projects across Myanmar.",
-    img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80',
+    img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80',
     alt: 'Sustainable green architecture building with eco-friendly design elements',
-    readTime: '5 min read'
+    readTime: '5 min read',
+    content: `
+      <p>Sustainability is no longer an optional add-on for construction projects — it is increasingly a client requirement, a regulatory expectation, and above all, the right thing to do. At Flyover, we have spent the last two years embedding sustainable principles into every phase of our design-build process.</p>
+      <h4>Passive Design First</h4>
+      <p>Before specifying any mechanical system, our design team evaluates passive strategies: building orientation, window-to-wall ratios, shading devices, and natural ventilation paths. In Myanmar's tropical climate, a well-oriented building can reduce cooling loads by 25–35% compared to a poorly sited one.</p>
+      <h4>Materials with Lower Embodied Carbon</h4>
+      <p>We have been steadily increasing our use of locally sourced materials to cut transportation emissions. Brickwork from regional kilns, timber certified by responsible forestry schemes, and recycled aggregate in non-structural concrete are now standard specifications on eligible projects.</p>
+      <ul>
+        <li>Local brick and masonry: reduces transport carbon by up to 60%</li>
+        <li>Fly-ash blended cement: cuts clinker demand and CO₂</li>
+        <li>Recycled steel from regional mills where structural grades permit</li>
+      </ul>
+      <h4>Water &amp; Energy</h4>
+      <p>Rainwater harvesting systems are now included in all new commercial projects above 3,000 sqm. Combined with low-flow fixtures, this has reduced potable water consumption on delivered buildings by an average of 40%.</p>
+      <p>We believe Myanmar's construction industry stands at an inflection point. The choices made in the next decade will shape the built environment — and the carbon footprint — of cities like Yangon and Naypyidaw for generations. We are committed to leading that change.</p>
+    `
   },
   {
     id: 3,
     category: 'Industry Update',
     date: 'December 10, 2025',
+    author: 'Ei Phyu, Interior Studio',
     title: "Interior Design Trends Shaping Myanmar's Spaces in 2026",
     excerpt: "From biophilic design to minimalist aesthetics, discover the top interior design trends our team is incorporating into residential and commercial projects this year.",
-    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80',
+    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80',
     alt: 'Modern interior design with minimalist aesthetics and natural elements',
-    readTime: '4 min read'
+    readTime: '4 min read',
+    content: `
+      <p>Myanmar's interior design landscape is shifting. Clients who once prioritised ornate finishes and heavy wooden furniture are increasingly drawn to cleaner, calmer environments that reflect global sensibilities while remaining rooted in local craft traditions.</p>
+      <h4>1. Biophilic Integration</h4>
+      <p>The desire to bring the outside in has never been stronger. We are specifying living walls, interior planting at scale, and natural stone features more than ever. In a country with such rich botanical diversity, this is one trend that feels genuinely local rather than imported.</p>
+      <h4>2. Warm Minimalism</h4>
+      <p>Pure white minimalism has given way to warmer, more textured interpretations — think limewash plaster walls, teak and bamboo accents, terracotta tile flooring, and muted clay palette lighting.</p>
+      <h4>3. Flexible, Multi-Modal Spaces</h4>
+      <p>Post-pandemic, commercial clients in particular want spaces that transition between focus work, collaboration, and social functions without physical reconfiguration. Moveable partitions, acoustic pods, and modular furniture systems are now a standard part of our commercial interior offering.</p>
+      <h4>4. Craftsmanship as Feature</h4>
+      <p>Myanmar has extraordinary artisanal craft traditions — lacquerware, hand-woven textiles, silver and bronze work. We have been working with local craftspeople to commission bespoke pieces that become signature elements of a space.</p>
+    `
   },
   {
     id: 4,
     category: 'Project Spotlight',
     date: 'November 22, 2025',
+    author: 'Zin Mar, Project Lead',
     title: 'Heritage Hotel Renovation: Preserving History, Embracing Modernity',
     excerpt: "A behind-the-scenes look at our award-winning Heritage Hotel Renovation project in Mandalay — blending historical preservation with contemporary comfort and functionality.",
-    img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80',
+    img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80',
     alt: 'Heritage hotel renovation project showing historical architecture with modern updates',
-    readTime: '6 min read'
+    readTime: '6 min read',
+    content: `
+      <p>When the owners of a colonial-era guesthouse in Mandalay approached Flyover with a brief to "make it feel like now without losing what it is," we knew we were in for one of the most demanding — and rewarding — projects of recent years. The result, completed in September 2025, has since won a regional Heritage Conservation Award.</p>
+      <h4>The Challenge</h4>
+      <p>The building, originally constructed in 1931, had been sympathetically maintained but never modernised. The brief was to add 18 new rooms, a spa, a rooftop bar, and contemporary bathrooms throughout, without disturbing the original teak structure, colonial facade, or the mature garden.</p>
+      <h4>Our Approach</h4>
+      <p>We began with a full structural survey and materials audit. Wherever original teak joinery, terrazzo floors, or decorative plasterwork remained in serviceable condition, we restored rather than replaced. Where damage was too severe, we sourced period-matched materials including hand-made clay roof tiles produced to the original dimensions by a local kiln in Sagaing.</p>
+      <h4>Selected Results</h4>
+      <ul>
+        <li>100% of original teak structural members retained</li>
+        <li>Original 1930s terrazzo floors restored across 1,200 sqm</li>
+        <li>18 new guest rooms added in a sympathetic extension</li>
+        <li>Rooftop bar with views over Mandalay Hill</li>
+        <li>Award: ASEAN Heritage Architecture Prize, Conservation Category, 2025</li>
+      </ul>
+    `
   },
   {
     id: 5,
     category: 'Tips & Guides',
     date: 'November 5, 2025',
+    author: 'Flyover Editorial',
     title: 'How to Choose the Right Architectural Firm for Your Dream Home',
     excerpt: "Building your dream home is one of the most significant investments you will make. Here are the key factors to consider when selecting an architectural and construction partner.",
-    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80',
+    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
     alt: 'Architectural blueprints and design plans for residential home construction',
-    readTime: '7 min read'
+    readTime: '7 min read',
+    content: `
+      <p>Choosing an architect and builder for your home is one of the most consequential decisions you will make. The right partner will translate your vision into a home that fits your life; the wrong one can mean years of frustration and budget overruns. Here is what to look for.</p>
+      <h4>1. Portfolio Fit, Not Just Portfolio Size</h4>
+      <p>A firm with fifty completed luxury villas may not be the right choice for a compact urban townhouse. Look for projects in their portfolio that resemble yours in scale, brief, and budget.</p>
+      <h4>2. Integration of Design and Construction</h4>
+      <p>An integrated design-build firm carries responsibility for both — meaning fewer disputes, faster decisions, and a single point of accountability. For most clients building their first home, this integration is invaluable.</p>
+      <h4>3. Transparency on Fees and Costs</h4>
+      <p>Be cautious of firms that cannot give you a clear fee structure up front. Reputable firms will be transparent about their fee basis, what it includes, and how cost control works across the project lifecycle.</p>
+      <h4>4. Communication Style</h4>
+      <p>You will work with your architect for 12–36 months. Their technical competence matters enormously, but so does their ability to explain complex decisions clearly and listen to your priorities.</p>
+      <h4>5. References from Past Clients</h4>
+      <p>Always ask for two or three client references, and actually call them. Ask not just whether they were happy with the result, but whether the process was what they expected and whether costs were managed well.</p>
+    `
   },
   {
     id: 6,
     category: 'Company News',
     date: 'October 18, 2025',
+    author: 'Flyover Editorial',
     title: 'Flyover Expands Operations to Mandalay with New Regional Office',
     excerpt: "We are excited to announce the opening of our third regional office in Mandalay, strengthening our ability to serve clients across Upper Myanmar with the same excellence and dedication.",
-    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
+    img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
     alt: 'Modern office space interior of Flyover new Mandalay regional office',
-    readTime: '3 min read'
+    readTime: '3 min read',
+    content: `
+      <p>Flyover Design &amp; Construction Co., Ltd. is pleased to announce the opening of our Mandalay Regional Office, marking our third permanent location following our headquarters in Naypyidaw and our Yangon studio.</p>
+      <h4>Why Mandalay?</h4>
+      <p>Mandalay is Myanmar's second-largest city and the economic heartland of Upper Myanmar. Over the past three years, we have completed seven significant projects in the region — including the Heritage Hotel Renovation, two residential estates, and a commercial mixed-use development.</p>
+      <h4>The New Office</h4>
+      <p>Our Mandalay studio occupies 380 sqm on the third floor of a commercial building in the 26th Street business district. It houses a design studio, a client meeting suite, a material library, and a project coordination area for on-site project managers.</p>
+      <h4>Our Mandalay Team</h4>
+      <p>The office is headed by Senior Project Director Ko Kyaw Zin Latt, who has managed construction projects in Upper Myanmar for over a decade. He is joined by two architects, a structural engineer, an interior designer, and a project administrator. We intend to grow the team to twelve by end of 2026.</p>
+    `
   }
-  
 ];
 
 const categoryColors = {
@@ -330,9 +425,11 @@ const arrowSVG = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" st
   <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
 </svg>`;
 
+// Build grid cards (all articles except featured id=1)
 const grid = document.getElementById('grid-posts');
-
-newsItems.forEach(item => {
+if (grid) {
+  const gridItems = allArticles.filter(a => a.id !== 1);
+  gridItems.forEach(item => {
     const bg = categoryColors[item.category] || categoryColors['Company News'];
     const article = document.createElement('article');
     article.className = 'post-card';
@@ -350,17 +447,104 @@ newsItems.forEach(item => {
         <p class="card-excerpt-sm">${item.excerpt}</p>
         <div class="post-footer">
           <span class="card-date">${item.date}</span>
-          <a href="News-Section.html" class="read-more-sm">Read More ${arrowSVG}</a>
+          <button class="read-more-sm" data-id="${item.id}">Read More ${arrowSVG}</button>
+        </div>
       </div>`;
-  grid.appendChild(article);
-});
+    grid.appendChild(article);
+  });
+}
 
-const btn = document.getElementById('viewAllBtn');
+// ── ARTICLE MODAL LOGIC ──────────────────────────────────────────
+(function () {
+  const overlay      = document.getElementById('articleModal');
+  if (!overlay) return;
 
-btn.addEventListener('click', function () {
-  // Replace with your actual navigation logic
-  console.log('View All Articles clicked');
-  // window.location.href = '/articles';
-});
+  const modalImg     = document.getElementById('modalImg');
+  const modalBadge   = document.getElementById('modalBadge');
+  const modalReadTime= document.getElementById('modalReadTime');
+  const modalTitle   = document.getElementById('modalTitle');
+  const modalDate    = document.getElementById('modalDate');
+  const modalAuthor  = document.getElementById('modalAuthor');
+  const modalArticle = document.getElementById('modalArticle');
+  const modalClose   = document.getElementById('modalClose');
+  const modalCtaBtn  = document.getElementById('modalCtaBtn');
+  const copyLinkBtn  = document.getElementById('modalCopyLink');
+
+  function openArticleModal(id) {
+    const post = allArticles.find(a => a.id === id);
+    if (!post) return;
+    const bg = categoryColors[post.category] || categoryColors['Company News'];
+
+    modalImg.src               = post.img;
+    modalImg.alt               = post.alt;
+    modalBadge.textContent     = post.category;
+    modalBadge.style.background = bg;
+    modalReadTime.textContent  = post.readTime;
+    modalTitle.textContent     = post.title;
+    modalDate.textContent      = post.date;
+    modalAuthor.textContent    = post.author;
+    modalArticle.innerHTML     = post.content;
+
+    overlay.classList.add('is-open');
+    document.body.classList.add('modal-open');
+    overlay.querySelector('.modal-body').scrollTop = 0;
+    modalClose.focus();
+  }
+
+  function closeArticleModal() {
+    overlay.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+  }
+
+  // Featured card — click anywhere on it OR its Read More button
+  const featuredCard = document.getElementById('featured-card');
+  if (featuredCard) {
+    featuredCard.addEventListener('click', function (e) {
+      const btn = e.target.closest('[data-id]');
+      if (btn) {
+        e.preventDefault();
+        openArticleModal(Number(btn.dataset.id));
+      }
+    });
+  }
+
+  // Grid card Read More buttons
+  const gridEl = document.getElementById('grid-posts');
+  if (gridEl) {
+    gridEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('[data-id]');
+      if (btn) openArticleModal(Number(btn.dataset.id));
+    });
+  }
+
+  // Close button
+  modalClose.addEventListener('click', closeArticleModal);
+
+  // Click outside panel closes modal
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeArticleModal();
+  });
+
+  // Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeArticleModal();
+  });
+
+  // CTA button closes modal before navigating
+  if (modalCtaBtn) {
+    modalCtaBtn.addEventListener('click', closeArticleModal);
+  }
+
+  // Copy link button
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', function () {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const orig = copyLinkBtn.innerHTML;
+        copyLinkBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+        setTimeout(() => { copyLinkBtn.innerHTML = orig; }, 1800);
+      });
+    });
+  }
+})();
 
 })();
