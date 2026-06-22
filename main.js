@@ -350,7 +350,7 @@ newsItems.forEach(item => {
         <p class="card-excerpt-sm">${item.excerpt}</p>
         <div class="post-footer">
           <span class="card-date">${item.date}</span>
-          <button class="read-more-sm">Read More ${arrowSVG}</button>
+          <a href="News-Section.html" class="read-more-sm">Read More ${arrowSVG}</a>
       </div>`;
   grid.appendChild(article);
 });
