@@ -1719,12 +1719,6 @@ body {
   .mission-cards { grid-template-columns: 1fr; }
 }
 
-/* ================================================================
-   TESTIMONIALS — Dual-row infinite marquee
-   Uses only existing Flyover design tokens from :root
-   ================================================================ */
-
-/* Section wrapper */
 .tm-section {
   padding-top: 5rem;
   padding-bottom: 5.5rem;
@@ -1733,13 +1727,11 @@ body {
   overflow: hidden;
 }
 
-/* Header */
 .tm-header {
   max-width: 48rem;
   margin-bottom: 3.5rem;
 }
 
-/* Fade mask — hides track edges left & right */
 .tm-fade-mask {
   -webkit-mask-image: linear-gradient(
     to right,
@@ -1757,17 +1749,14 @@ body {
   );
 }
 
-/* Each row clips its overflowing track */
 .tm-row {
   overflow: hidden;
 }
 
-/* Pause on hover so users can read a card */
 .tm-row:hover .tm-track {
   animation-play-state: paused;
 }
 
-/* The scrolling strip — flex of duplicated cards */
 .tm-track {
   display: flex;
   width: max-content;          /* stretches to fit all cards */
@@ -1780,7 +1769,6 @@ body {
   animation: tm-scroll-right 50s linear infinite;
 }
 
-/* Keyframes — move exactly -50% (the duplicated half) */
 @keyframes tm-scroll-left {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -1790,7 +1778,6 @@ body {
   to   { transform: translateX(0); }
 }
 
-/* Reduced-motion: stop scrolling, wrap cards instead */
 @media (prefers-reduced-motion: reduce) {
   .tm-track,
   .tm-track--reverse {
@@ -1804,7 +1791,6 @@ body {
   .tm-row { overflow: visible; }
 }
 
-/* ── Card ──────────────────────────────────────────────── */
 .tm-card {
   flex-shrink: 0;
   width: 360px;
@@ -1824,7 +1810,6 @@ body {
   transform: translateY(-3px);
 }
 
-/* Quote open-mark */
 .tm-open-quote {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 4.5rem;
@@ -1835,7 +1820,6 @@ body {
   user-select: none;
 }
 
-/* Quote body */
 .tm-quote {
   font-size: 0.9375rem;
   line-height: 1.72;
@@ -1844,7 +1828,6 @@ body {
   font-style: italic;
 }
 
-/* Divider */
 .tm-divider {
   width: 2.5rem;
   height: 2px;
@@ -1853,7 +1836,6 @@ body {
   margin: 1.375rem 0 1.125rem;
 }
 
-/* Author row */
 .tm-author-row {
   display: flex;
   align-items: center;
@@ -1861,7 +1843,6 @@ body {
   gap: 0.75rem;
 }
 
-/* Avatar initial circle */
 .tm-avatar {
   width: 2.5rem;
   height: 2.5rem;
