@@ -27,10 +27,11 @@
         <a href="#services" class="nav-link">Services</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#News"  class="nav-link">News</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
         <a href="#contact"  class="nav-link">Contact</a>
 
       </nav>
-      <a href="#contact" class="btn btn-accent btn-sm">Get a Quote</a>
+      <a href="tel:+959429329942" class="btn btn-accent btn-sm">Get a Call</a>
       <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -432,12 +433,12 @@
           </p>
           <div class="card-footer">
             <span class="card-date">January 15, 2026</span>
-            <button class="read-more-btn" data-id="1">
+                        <a href="News-Section.html" class="read-more-btn">
               Read More
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -534,6 +535,29 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="tm-section">
+      <div class="container">
+        <div class="tm-header">
+          <div class="label-badge section-label-badge">Client Voices</div>
+          <h2 class="section-title">Trusted by Those Who <em class="accent-italic">Build with Us</em></h2>
+          <p class="section-desc">Stories from homeowners, developers and investors who shaped Myanmar with Flyover.</p>
+        </div>
+      </div>
+
+      <!-- Row 1 — scrolls left -->
+      <div class="tm-fade-mask">
+        <div class="tm-row">
+          <div class="tm-track" id="tm-track-1"></div>
+        </div>
+
+        <!-- Row 2 — scrolls right -->
+        <div class="tm-row" style="margin-top:1.25rem">
+          <div class="tm-track tm-track--reverse" id="tm-track-2"></div>
         </div>
       </div>
     </section>
@@ -735,64 +759,8 @@
     </article>
   </div>
 
-  <!-- ARTICLE MODAL -->
-  <div class="article-modal-overlay" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="article-modal-panel">
-      <div class="modal-img-wrap">
-        <img id="modalImg" src="" alt="" />
-        <div class="modal-img-gradient"></div>
-        <div class="modal-img-meta">
-          <span class="badge" id="modalBadge"></span>
-          <span class="modal-read-time" id="modalReadTime"></span>
-        </div>
-        <button class="modal-close" id="modalClose" aria-label="Close article">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h2 class="modal-title" id="modalTitle"></h2>
-        <div class="modal-date-row">
-          <span class="modal-card-date" id="modalDate"></span>
-          <div class="modal-divider"></div>
-          <span class="modal-card-date" id="modalAuthor"></span>
-        </div>
-        <div class="modal-article" id="modalArticle"></div>
-      </div>
-      <div class="modal-footer">
-        <div class="modal-share">
-          <span>Share:</span>
-          <button class="share-btn" title="Copy link" id="modalCopyLink">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-            </svg>
-          </button>
-          <button class="share-btn" title="Share on Facebook">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-            </svg>
-          </button>
-          <button class="share-btn" title="Share on LinkedIn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-              <rect x="2" y="9" width="4" height="12"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-          </button>
-        </div>
-        <a href="#contact" class="modal-cta" id="modalCtaBtn">
-          Contact Us About This
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <script src="main.js"></script>
+  <script src="testimonials.js"></script>
 
   <!-- Floating call button -->
   <a href="tel:+959429329942" class="floating-call" aria-label="Call Flyover">
