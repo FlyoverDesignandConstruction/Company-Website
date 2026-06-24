@@ -170,25 +170,52 @@
 
   revealTargets.forEach((el) => revealObserver.observe(el));
 
-  // ── ACTIVE NAV LINK ON SCROLL ──────────────────────────────
-  const sections = document.querySelectorAll("section[id]");
+  // ── ACTIVE NAV LINK ON SCROLL (FIXED) ──────────────────────
+  // Uses scroll position + section offsets for reliable highlighting
+  // across all nav links, not just the ones that happen to intersect.
+  const sections = Array.from(document.querySelectorAll("section[id]"));
   const navLinks = document.querySelectorAll(".main-nav .nav-link");
 
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute("id");
-          navLinks.forEach((link) => {
-            const isActive = link.getAttribute("href") === "#" + id;
-            link.classList.toggle("active-link", isActive);
-          });
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-  sections.forEach((s) => navObserver.observe(s));
+  function updateActiveNav() {
+    const headerH    = header ? header.offsetHeight : 68;
+    const scrollMid  = window.scrollY + headerH + 10;
+    const pageBottom = window.scrollY + window.innerHeight;
+    const docHeight  = document.documentElement.scrollHeight;
+
+    // Find the last section whose top is above the scroll midpoint
+    let activeId = sections.length ? sections[0].id : null;
+
+    for (let i = 0; i < sections.length; i++) {
+      const sectionTop = sections[i].getBoundingClientRect().top + window.scrollY;
+      if (sectionTop <= scrollMid) {
+        activeId = sections[i].id;
+      }
+    }
+
+    // If we're at the very bottom, activate the last section
+    if (pageBottom >= docHeight - 4) {
+      activeId = sections[sections.length - 1]?.id ?? activeId;
+    }
+
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      const isActive = href === "#" + activeId;
+      link.classList.toggle("active-link", isActive);
+    });
+  }
+
+  // Run on scroll and on load
+  window.addEventListener("scroll", updateActiveNav, { passive: true });
+  // Small delay so layout is settled before first run
+  setTimeout(updateActiveNav, 100);
+
+  // Also activate nav link immediately when clicked (smooth scroll delay fix)
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function () {
+      navLinks.forEach((l) => l.classList.remove("active-link"));
+      this.classList.add("active-link");
+    });
+  });
 
   // ── RIPPLE EFFECT ON CTA BUTTON ───────────────────────────
   document.querySelectorAll(".btn-shimmer, .btn-accent, .btn-primary").forEach((btn) => {
@@ -598,6 +625,5 @@ if (grid) {
 
   tmFillTrack(document.getElementById("tm-track-1"), TESTIMONIALS.slice(0, 4));
   tmFillTrack(document.getElementById("tm-track-2"), TESTIMONIALS.slice(4, 8));
-
 
 })();
