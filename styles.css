@@ -10,7 +10,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: "Inter", system-ui, sans-serif;
   background-color: #ffffff;
-  color: #18191f;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
   overflow-x: hidden;
